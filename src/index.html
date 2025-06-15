@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Tetris - 80年代風テトリス</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-black text-green-400 font-mono overflow-hidden">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="retro-container p-8">
+            <!-- Game Title -->
+            <h1 class="text-4xl text-center mb-8 retro-text">RETRO TETRIS</h1>
+            
+            <div class="flex gap-8">
+                <!-- Game Board -->
+                <div class="game-area">
+                    <canvas id="gameCanvas" width="300" height="600" class="retro-border"></canvas>
+                </div>
+                
+                <!-- Game Info Panel -->
+                <div class="info-panel retro-border p-4 w-48">
+                    <div class="mb-6">
+                        <h3 class="text-lg mb-2 text-cyan-400">SCORE</h3>
+                        <div id="score" class="text-2xl">0</div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg mb-2 text-cyan-400">LEVEL</h3>
+                        <div id="level" class="text-2xl">1</div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg mb-2 text-cyan-400">LINES</h3>
+                        <div id="lines" class="text-2xl">0</div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg mb-2 text-cyan-400">NEXT</h3>
+                        <canvas id="nextCanvas" width="80" height="80" class="retro-border-small"></canvas>
+                    </div>
+                    
+                    <div class="controls-info text-xs text-gray-400">
+                        <h4 class="text-sm text-cyan-400 mb-2">CONTROLS</h4>
+                        <div>← → : Move</div>
+                        <div>↓ : Soft Drop</div>
+                        <div>↑ : Rotate</div>
+                        <div>SPACE : Hard Drop</div>
+                        <div>P : Pause</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Game Controls -->
+            <div class="text-center mt-6">
+                <button id="startBtn" class="retro-btn mr-4">START</button>
+                <button id="pauseBtn" class="retro-btn mr-4" disabled>PAUSE</button>
+                <button id="restartBtn" class="retro-btn">RESTART</button>
+            </div>
+            
+            <!-- Game Over Screen -->
+            <div id="gameOver" class="game-over-screen hidden">
+                <div class="text-center">
+                    <h2 class="text-3xl mb-4 text-red-400">GAME OVER</h2>
+                    <p class="text-xl mb-6">Final Score: <span id="finalScore">0</span></p>
+                    <button id="restartFromGameOver" class="retro-btn">PLAY AGAIN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
