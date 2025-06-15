@@ -104,11 +104,23 @@ class TetrisGame {
     
     initAudio() {
         // Korobeiniki melody using Web Audio API
-        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        this.audioContext = null;
         this.isPlayingMusic = false;
     }
     
+    ensureAudioContext() {
+        if (!this.audioContext) {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        // Resume audio context if suspended (required by some browsers)
+        if (this.audioContext.state === 'suspended') {
+            this.audioContext.resume();
+        }
+    }
+    
     startGame() {
+        this.ensureAudioContext(); // Initialize audio context on user interaction
+        
         this.gameRunning = true;
         this.isPaused = false;
         this.score = 0;
@@ -455,7 +467,7 @@ class TetrisGame {
     
     // Korobeiniki melody implementation
     playKorobeiniki() {
-        if (this.isPlayingMusic) return;
+        if (this.isPlayingMusic || !this.audioContext) return;
         this.isPlayingMusic = true;
         
         // Korobeiniki melody notes (simplified version)
@@ -502,6 +514,8 @@ class TetrisGame {
     }
     
     playNote(frequency, duration) {
+        if (!this.audioContext) return;
+        
         const oscillator = this.audioContext.createOscillator();
         const gainNode = this.audioContext.createGain();
         
